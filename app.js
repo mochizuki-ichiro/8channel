@@ -14,6 +14,12 @@ app.set('view engine', 'ejs')
 
 // デフォルトのルーティングとしてindexを指定
 app.use('/', index)
+
+// 404用ページを表示
+app.use((req, res, next)=>{
+  res.status('404')
+  return res.render('error',{message: "404 Not Found"})
+})
 // サーバーを定義、Expressを利用する
 const server = http.createServer(app)
 // ３０００番ポートでリクエストを待ち受ける
