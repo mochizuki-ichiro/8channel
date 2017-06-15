@@ -4,6 +4,7 @@ const http = require('http')
 const express = require('express')
 const logger = require('morgan')
 const mysql = require('mysql')
+const bodyParser = require('body-parser')
 const app = express()
 
 const connection = mysql.createConnection({
@@ -25,6 +26,10 @@ global.connection = connection
 // ルーティングファイルを読み込む
 const index = require('./routes/index')
 
+// jsonをサポート
+app.use(bodyParser.json())
+// x-www-form-urlencodedをサポート
+app.use(bodyParser.urlencoded({ extended: false }))
 // テンプレートファイルを配置したディレクトリを指定
 app.set('views', `${__dirname}/views`)
 // テンプレートファイルの形式としてejsを指定
