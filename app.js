@@ -3,7 +3,24 @@
 const http = require('http')
 const express = require('express')
 const logger = require('morgan')
+const mysql = require('mysql')
 const app = express()
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  database: '8chan'
+})
+
+
+connection.connect(function(err) {
+  if (err) {
+    return console.error('error connecting: ' + err.stack);
+  }else{
+    console.log('connected as id ' + connection.threadId);
+  }                                                                                                                                               })
+
+global.connection = connection
 
 // ルーティングファイルを読み込む
 const index = require('./routes/index')
