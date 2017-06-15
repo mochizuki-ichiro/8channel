@@ -2,6 +2,7 @@
 // httpを利用するためのモジュール
 const http = require('http')
 const express = require('express')
+const logger = require('morgan')
 const app = express()
 
 // ルーティングファイルを読み込む
@@ -11,7 +12,8 @@ const index = require('./routes/index')
 app.set('views', `${__dirname}/views`)
 // テンプレートファイルの形式としてejsを指定
 app.set('view engine', 'ejs')
-
+// ログを取得
+app.use(logger())
 // デフォルトのルーティングとしてindexを指定
 app.use('/', index)
 
